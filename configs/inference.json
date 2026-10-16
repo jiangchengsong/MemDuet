@@ -1,0 +1,48 @@
+{
+  "seed": 42,
+  "system1": {
+    "base_model": "Qwen/Qwen3.5-2B",
+    "adapter_path": "checkpoints/system1",
+    "dtype": "bfloat16"
+  },
+  "system2": {
+    "base_model": "checkpoints/system2/backbone",
+    "adapter_path": "checkpoints/system2",
+    "dtype": "bfloat16"
+  },
+  "data": {
+    "chunk_tokens": 5000
+  },
+  "rollout": {
+    "window_size": 4,
+    "memory_tokens": 1024,
+    "answer_tokens": 1024,
+    "selection_mode": "sample",
+    "decision_delta": -3.0
+  },
+  "inference": {
+    "engine": "vllm",
+    "method": "memduet",
+    "gpu_device": "0",
+    "tensor_parallel_size": 1,
+    "max_num_seqs": 4,
+    "enforce_eager": true,
+    "timeout_seconds": 600,
+    "api_key_env": "VLLM_API_KEY",
+    "system1": {
+      "model_path": "models/memduet-system1",
+      "served_model_name": "memduet-system1",
+      "base_url": "http://127.0.0.1:8001/v1",
+      "max_model_len": 8192,
+      "gpu_memory_utilization": 0.25
+    },
+    "system2": {
+      "model_path": "models/memduet-system2",
+      "served_model_name": "memduet-system2",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "max_model_len": 8192,
+      "gpu_memory_utilization": 0.65
+    }
+  },
+  "description": "MemDuet vLLM inference; supply compatible trained checkpoints before use."
+}

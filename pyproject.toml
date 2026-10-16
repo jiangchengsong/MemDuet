@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "memduet"
+version = "0.1.0"
+description = "Dual-process memory inference for long-context reasoning"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = []
+
+[project.optional-dependencies]
+inference = ["aiohttp>=3.11,<4", "transformers>=5.3,<6"]
+export = ["torch>=2.6,<3", "peft>=0.17,<1", "accelerate>=1.4,<2", "safetensors>=0.4"]
+serve = ["vllm==0.28.0"]
+
+[project.scripts]
+memduet = "memduet.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+memduet = ["prompts/*.txt"]

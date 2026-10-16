@@ -1,0 +1,8 @@
+vllm==0.28.0
+torch==2.13.0
+transformers==5.15.0
+aiohttp==3.14.3
+peft==0.20.0
+accelerate==1.14.0
+safetensors==0.8.0
+numpy==2.3.5

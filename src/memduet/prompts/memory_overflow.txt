@@ -1,0 +1,8 @@
+Compress the memory below to at most {budget} tokens. Preserve every fact and constraint useful to solve the problem. Return only the compressed memory.
+<problem>
+{prompt}
+</problem>
+<memory>
+{memory}
+</memory>
+Compressed memory:

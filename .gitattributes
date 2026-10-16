@@ -1,0 +1,2 @@
+# Preserve the exact prompt bytes used by the trained models.
+src/memduet/prompts/*.txt -whitespace

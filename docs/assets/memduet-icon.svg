@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">MemDuet</title>
+  <desc id="desc">Two musical voices, navy and green, joined in a duet.</desc>
+  <g fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 46V20C31 20 35 18 39 15" stroke="#15244d"/>
+    <path d="M39 15C43 12 47 10 52 10V38" stroke="#347955"/>
+  </g>
+  <ellipse cx="18" cy="47" rx="11.5" ry="8" transform="rotate(-22 18 47)" fill="#15244d"/>
+  <ellipse cx="44" cy="39" rx="11.5" ry="8" transform="rotate(-22 44 39)" fill="#347955"/>
+</svg>

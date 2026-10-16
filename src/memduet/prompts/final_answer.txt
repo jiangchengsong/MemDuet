@@ -1,0 +1,11 @@
+You are presented with a problem and a previous memory. Please answer the problem based on the previous memory and put the answer in \boxed{}.
+
+<problem> 
+{prompt}
+</problem>
+
+<memory>
+{memory}
+</memory>
+
+Your answer:

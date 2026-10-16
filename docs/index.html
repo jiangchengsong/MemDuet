@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MemDuet learns dual-process memory for long-context reasoning: parallel evidence selection with a small model, verified memory updates with a large model.">
+  <meta name="theme-color" content="#15244d">
+  <title>MemDuet — Learning Dual-Process Memory for Long-Context Reasoning</title>
+  <link rel="icon" type="image/svg+xml" href="assets/memduet-icon.svg">
+  <link rel="canonical" href="https://jiangchengsong.github.io/MemDuet/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MemDuet: Learning Dual-Process Memory for Long-Context Reasoning">
+  <meta property="og:description" content="Parallel evidence selection, verified memory updates, and bounded memory for long-context reasoning.">
+  <meta property="og:url" content="https://jiangchengsong.github.io/MemDuet/">
+  <meta property="og:image" content="https://jiangchengsong.github.io/MemDuet/assets/framework.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="MemDuet: Learning Dual-Process Memory for Long-Context Reasoning">
+  <meta name="citation_author" content="Jiangcheng Song">
+  <meta name="citation_author" content="Haodong Jing">
+  <meta name="citation_author" content="Yulin Mu">
+  <meta name="citation_author" content="Lesong Tao">
+  <meta name="citation_author" content="Jixin Wang">
+  <meta name="citation_author" content="Jin Cui">
+  <meta name="citation_author" content="Tianjing Ren">
+  <meta name="citation_author" content="Runxuan Xie">
+  <meta name="citation_author" content="Yongqiang Ma">
+  <meta name="citation_author" content="Nanning Zheng">
+  <meta name="citation_publication_date" content="2026/10/14">
+  <meta name="citation_arxiv_id" content="2610.19928">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2610.19928">
+  <link rel="stylesheet" href="styles.css?v=layout-refined-20261016">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#main" aria-label="MemDuet home"><img src="assets/memduet-icon.svg" width="36" height="36" alt="">MemDuet</a>
+      <nav aria-label="Main navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#resources">Resources</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" aria-labelledby="paper-title">
+      <div class="hero-brand">
+        <img class="hero-icon" src="assets/memduet-icon.svg" width="104" height="104" alt="">
+        <h1 id="paper-title">MemDuet</h1>
+      </div>
+      <p class="paper-subtitle">Learning Dual-Process Memory<br class="mobile-break"> for Long-Context Reasoning</p>
+      <ul class="author-list" aria-label="Authors in publication order">
+        <li><a href="mailto:enone@stu.xjtu.edu.cn">Jiangcheng Song</a><sup aria-label="Affiliation 1">1</sup></li><li>Haodong Jing<sup aria-label="Affiliation 1">1</sup></li><li>Yulin Mu<sup aria-label="Affiliation 2">2</sup></li><li>Lesong Tao<sup aria-label="Affiliation 1">1</sup></li><li>Jixin Wang<sup aria-label="Affiliation 1">1</sup></li><li>Jin Cui<sup aria-label="Affiliation 1">1</sup></li><li>Tianjing Ren<sup aria-label="Affiliation 3">3</sup></li><li>Runxuan Xie<sup aria-label="Affiliation 2">2</sup></li><li>Yongqiang Ma<sup aria-label="Affiliation 1">1</sup></li><li><a href="mailto:nnzheng@xjtu.edu.cn">Nanning Zheng</a><sup aria-label="Affiliation 1 and corresponding author">1,*</sup></li>
+      </ul>
+      <p class="affiliation"><sup>1</sup> State Key Laboratory of Human-Machine Hybrid Augmented Intelligence, Institute of Artificial Intelligence and Robotics, Xi'an Jiaotong University</p>
+      <p class="affiliation"><sup>2</sup> Faculty of Electronic and Information Engineering, Xi'an Jiaotong University</p>
+      <p class="affiliation"><sup>3</sup> Imperial College London</p>
+      <div class="institution-strip" aria-label="Research institutions">
+        <a class="institution institution--xjtu" href="https://www.xjtu.edu.cn/" target="_blank" rel="noopener" aria-label="Xi'an Jiaotong University">
+          <img src="assets/branding/xjtu-red.png" width="2935" height="786" alt="Xi'an Jiaotong University">
+        </a>
+        <a class="institution institution--iair" href="https://iair.xjtu.edu.cn/yjs_xyjj/yjs_xyjj.htm" aria-label="Institute of Artificial Intelligence and Robotics" title="人工智能与机器人研究所" target="_blank" rel="noopener">
+          <span class="institution-mark institution-mark--iair" aria-hidden="true"><img src="assets/branding/iair-cai-white.png" width="831" height="70" alt=""></span>
+          <span class="institution-name" lang="zh-CN">人工智能与机器人研究所</span>
+        </a>
+        <a class="institution institution--cai" href="https://iair.xjtu.edu.cn/" aria-label="College of Artificial Intelligence" title="人工智能学院" target="_blank" rel="noopener">
+          <span class="institution-mark institution-mark--cai" aria-hidden="true"><img src="assets/branding/iair-cai-white.png" width="831" height="70" alt=""></span>
+          <span class="institution-name" lang="zh-CN">人工智能学院</span>
+        </a>
+        <a class="institution institution--laboratory" href="https://iair.xjtu.edu.cn/yjs_xyjj/xgkyjg.htm" target="_blank" rel="noopener" aria-label="State Key Laboratory of Human-Machine Hybrid Augmented Intelligence" title="人机混合增强智能全国重点实验室">
+          <span class="institution-mark institution-mark--hai" aria-hidden="true"><img src="assets/branding/hai.png" width="600" height="389" alt=""></span>
+        </a>
+      </div>
+      <div class="contact-details">
+        <p class="corresponding-note">* Corresponding author: Nanning Zheng · <a href="mailto:nnzheng@xjtu.edu.cn">nnzheng@xjtu.edu.cn</a></p>
+        <p class="contact-note">Jiangcheng Song · <a href="mailto:enone@stu.xjtu.edu.cn">enone@stu.xjtu.edu.cn</a></p>
+      </div>
+      <div class="hero-actions" aria-label="Project resources">
+        <a class="button resource-button resource-button--arxiv" href="https://arxiv.org/abs/2610.19928" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 3 14 18M4 20l5-7m6-2 5-8M9 5l3 4m1 6 3 4"/></svg><span>arXiv</span></a>
+        <a class="button resource-button resource-button--paper" href="https://arxiv.org/pdf/2610.19928" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h6"/></svg><span>Paper PDF</span></a>
+        <a class="button resource-button resource-button--code" href="https://github.com/jiangchengsong/MemDuet" target="_blank" rel="noopener"><img class="resource-brand-icon resource-brand-icon--github" src="assets/branding/github.svg" width="20" height="20" alt=""><span>Code</span></a>
+        <a class="button resource-button resource-button--models" href="#models" title="Browse four System 1 models on Hugging Face"><img class="resource-brand-icon" src="assets/branding/huggingface.svg" width="26" height="26" alt=""><span>Models</span></a>
+      </div>
+      <dl class="stats" aria-label="Research summary">
+        <div><dd>84.20<span>%</span></dd><dt>Mean RULER-HQA accuracy</dt></div>
+        <div><dd>9.74<span>×</span></dd><dt>Mean inference speedup</dt></div>
+        <div><dd>73.91<span>%</span></dd><dt>Output-token savings</dt></div>
+      </dl>
+      <p class="stats-note">Accuracy averages nine RULER-HQA context lengths. Speedup and token savings average evaluation settings across RULER-HQA, LongBench v2, and 2WikiMultiHopQA, relative to RL-MemAgent.</p>
+    </section>
+
+    <section id="abstract" class="abstract-section section" aria-labelledby="abstract-title">
+      <div class="container abstract-content">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>Reasoning over infinitely long documents is becoming a reality with recurrent memory agents. However, increasing context length exacerbates the trade-off between reasoning performance and inference efficiency. Inspired by Kahneman&#x27;s account of fast and slow thinking, we propose MemDuet, a dual-process memory framework that learns to coordinate a small language model for fast, parallel evidence selection from raw context chunks (System 1) with a large language model for memory-update verification and memory updates in document order (System 2). We train MemDuet in three stages: supervised fine-tuning of System 1 for evidence selection, Group Relative Policy Optimization (GRPO) of System 2 for verification and memory rewriting, and joint optimization of both policies to coordinate selection and updating for long-context reasoning. Experiments on diverse long-context reasoning benchmarks (RULER-HQA, LongBench v2, and 2WikiMultiHopQA) demonstrate a favorable accuracy–efficiency trade-off as context length grows. Averaged across evaluation settings on the three datasets, MemDuet achieves an end-to-end inference speedup of 9.74× and an output-token reduction of 73.91% relative to RL-MemAgent.</p>
+      </div>
+    </section>
+
+    <section id="method" class="method-section section" aria-labelledby="method-title">
+      <div class="container">
+        <p class="section-label">Method</p>
+        <h2 id="method-title">Two systems. One memory.</h2>
+        <div class="system-descriptions">
+          <div>
+            <h3>System 1 <span>·</span> Select</h3>
+            <p>A small language model scans raw context chunks in parallel, selecting evidence that may warrant a memory update.</p>
+          </div>
+          <div>
+            <h3>System 2 <span>·</span> Verify &amp; update</h3>
+            <p>A large language model verifies selected candidates against the current memory, then commits updates in document order.</p>
+          </div>
+        </div>
+        <figure class="framework-figure">
+          <button class="figure-button" type="button" data-figure="assets/framework.png" data-title="MemDuet inference workflow" aria-label="Enlarge the MemDuet inference workflow">
+            <img src="assets/framework.png" width="2400" height="942" alt="MemDuet workflow: System 1 selects candidate chunks in parallel; System 2 verifies candidates, commits the earliest accepted update, and continues through the document.">
+            <span class="zoom-hint"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>Enlarge figure</span>
+          </button>
+          <figcaption>Parallel selection, verified updates, and bounded recurrent memory.</figcaption>
+        </figure>
+        <details class="training-details">
+          <summary>Explore the three-stage training curriculum <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <p>Supervised evidence selection for System 1, reinforcement learning for System 2, and joint optimization of the two policies.</p>
+          <button class="figure-button" type="button" data-figure="assets/training-paper.png" data-title="MemDuet training curriculum — original paper figure" aria-label="Enlarge the three-stage training curriculum">
+            <img src="assets/training-paper.png" width="1778" height="2400" alt="Original paper figure: System 1 supervised warm-up, System 2 reinforcement learning with System 1 frozen, and joint policy optimization of both systems." loading="lazy">
+            <span class="zoom-hint">Enlarge figure</span>
+          </button>
+        </details>
+      </div>
+    </section>
+
+    <section id="results" class="section results-section" aria-labelledby="results-title">
+      <div class="container">
+        <p class="section-label">Results</p>
+        <h2 id="results-title">Accuracy with selective computation.</h2>
+        <div class="results-layout">
+          <figure class="tradeoff-figure">
+            <button class="figure-button" type="button" data-figure="assets/tradeoff.svg" data-title="Accuracy and efficiency on RULER-HQA" aria-label="Enlarge the accuracy and efficiency plot">
+              <img src="assets/tradeoff.svg" alt="RULER-HQA accuracy versus average time: MemDuet reaches 84.20 percent mean accuracy. Bubble labels show each method's output-token ratio relative to MemDuet." loading="lazy">
+              <span class="zoom-hint"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>Enlarge figure</span>
+            </button>
+            <figcaption>Current manuscript figure. Bubble labels compare mean output tokens with MemDuet.</figcaption>
+          </figure>
+          <div class="results-copy">
+            <p>We evaluate long-context reasoning on RULER-HQA. Across the nine shared lengths from <strong>7K to 1.75M tokens</strong>, MemDuet achieves <strong>84.20% mean accuracy</strong>.</p>
+            <p>The figure summarizes the accuracy–latency trade-off. Each bubble represents a method; its label gives output-token use relative to MemDuet.</p>
+            <p class="scope-note">Timing uses workload-specific A100-equivalent estimates. Accuracy and efficiency cohorts are not necessarily matched; this is a descriptive comparison.</p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="RULER-HQA accuracy table, scroll horizontally if needed">
+              <table>
+                <caption>RULER-HQA accuracy <span>(sub-EM, %)</span></caption>
+                <thead><tr><th scope="col">Context</th><th scope="col">MemDuet</th><th scope="col">RL-MemAgent</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">7K</th><td>87.50</td><td>81.25</td></tr>
+                  <tr data-extra-row hidden><th scope="row">14K</th><td>83.59</td><td>81.25</td></tr>
+                  <tr data-extra-row hidden><th scope="row">28K</th><td>89.06</td><td>82.03</td></tr>
+                  <tr data-extra-row hidden><th scope="row">56K</th><td>79.69</td><td>80.47</td></tr>
+                  <tr><th scope="row">112K</th><td>87.50</td><td>79.69</td></tr>
+                  <tr data-extra-row hidden><th scope="row">224K</th><td>85.94</td><td>75.78</td></tr>
+                  <tr><th scope="row">448K</th><td>82.81</td><td>76.56</td></tr>
+                  <tr data-extra-row hidden><th scope="row">896K</th><td>82.03</td><td>74.22</td></tr>
+                  <tr><th scope="row">1.75M</th><td>79.69</td><td>77.34</td></tr>
+                  <tr class="outside-summary" data-extra-row hidden><th scope="row">3.5M <span>*</span></th><td>75.78</td><td data-accuracy="memagent-3.5m">71.88</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <button id="table-toggle" class="text-button" type="button" aria-expanded="false">Show all 10 context lengths <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+            <p id="long-context-note" class="table-note" hidden>* The 3.5M result is reported separately and is excluded from the nine-length mean.</p>
+          </div>
+        </div>
+        <details class="scaling-details">
+          <summary>See how computation scales with context length <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <figure>
+            <button class="figure-button" type="button" data-figure="assets/scaling.svg" data-title="Computation across context lengths" aria-label="Enlarge the context scaling figure">
+              <img src="assets/scaling.svg" alt="The manuscript's context-length scaling plots for latency and total output tokens." loading="lazy">
+              <span class="zoom-hint">Enlarge figure</span>
+            </button>
+          </figure>
+        </details>
+      </div>
+    </section>
+
+    <section id="resources" class="section resources-section" aria-labelledby="resources-title">
+      <div class="container">
+        <p class="section-label">Resources</p>
+        <h2 id="resources-title">Read, reproduce, build on.</h2>
+        <div class="resource-list">
+          <div class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h8"/></svg>
+            <h3>Paper &amp; appendix</h3>
+            <p>Published preprint with references and appendices.</p>
+            <a class="button resource-button resource-button--arxiv resource-action" href="https://arxiv.org/abs/2610.19928" target="_blank" rel="noopener">Open arXiv</a>
+          </div>
+          <div id="code" class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6"/></svg>
+            <h3>Code &amp; quickstart</h3>
+            <p>Inference code, vLLM serving, checkpoint export, and evaluation instructions.</p>
+            <a class="button resource-button resource-button--code resource-action" href="https://github.com/jiangchengsong/MemDuet#inference-quickstart" target="_blank" rel="noopener">Get code</a>
+          </div>
+          <div id="models" class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10v10M3 7l9 5 9-5m-13.5-7 9 5"/></svg>
+            <h3>System 1 <span>·</span> 2B</h3>
+            <p>Qwen3.5-2B · Main evidence-selection model.</p>
+            <a class="button resource-button resource-button--models resource-action" href="https://huggingface.co/jiangchengsong/MemDuet-S1-Qwen3.5-2B" target="_blank" rel="noopener" aria-label="Open MemDuet S1 Qwen3.5-2B on Hugging Face"><img class="resource-brand-icon" src="assets/branding/huggingface.svg" width="20" height="20" alt=""><span>Hugging Face</span></a>
+          </div>
+          <div class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10v10M3 7l9 5 9-5m-13.5-7 9 5"/></svg>
+            <h3>System 1 <span>·</span> 0.5B</h3>
+            <p>Qwen2.5-0.5B · Evaluated evidence-selection variant.</p>
+            <a class="button resource-button resource-button--models resource-action" href="https://huggingface.co/jiangchengsong/MemDuet-S1-Qwen2.5-0.5B" target="_blank" rel="noopener" aria-label="Open MemDuet S1 Qwen2.5-0.5B on Hugging Face"><img class="resource-brand-icon" src="assets/branding/huggingface.svg" width="20" height="20" alt=""><span>Hugging Face</span></a>
+          </div>
+          <div class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10v10M3 7l9 5 9-5m-13.5-7 9 5"/></svg>
+            <h3>System 1 <span>·</span> 1.5B</h3>
+            <p>Qwen2.5-1.5B · Evaluated evidence-selection variant.</p>
+            <a class="button resource-button resource-button--models resource-action" href="https://huggingface.co/jiangchengsong/MemDuet-S1-Qwen2.5-1.5B" target="_blank" rel="noopener" aria-label="Open MemDuet S1 Qwen2.5-1.5B on Hugging Face"><img class="resource-brand-icon" src="assets/branding/huggingface.svg" width="20" height="20" alt=""><span>Hugging Face</span></a>
+          </div>
+          <div class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10v10M3 7l9 5 9-5m-13.5-7 9 5"/></svg>
+            <h3>System 1 <span>·</span> 0.8B</h3>
+            <p>Qwen3.5-0.8B · Evaluated evidence-selection variant.</p>
+            <a class="button resource-button resource-button--models resource-action" href="https://huggingface.co/jiangchengsong/MemDuet-S1-Qwen3.5-0.8B" target="_blank" rel="noopener" aria-label="Open MemDuet S1 Qwen3.5-0.8B on Hugging Face"><img class="resource-brand-icon" src="assets/branding/huggingface.svg" width="20" height="20" alt=""><span>Hugging Face</span></a>
+          </div>
+          <div class="resource-row">
+            <svg class="resource-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10v10M3 7l9 5 9-5m-13.5-7 9 5"/></svg>
+            <h3>System 2 <span>·</span> 7B</h3>
+            <p>Large model for verification and memory updates.</p>
+            <span class="resource-status">Release in preparation</span>
+          </div>
+        </div>
+        <p class="resource-note">All four System 1 models are available on Hugging Face. Main results use Qwen3.5-2B. See the code quickstart for setup, prompts, and inference instructions.</p>
+      </div>
+    </section>
+
+    <section id="citation" class="section citation-section" aria-labelledby="citation-title">
+      <div class="container">
+        <p class="section-label">Citation</p>
+        <h2 id="citation-title">Reference this work.</h2>
+        <div class="citation-box">
+          <div class="citation-line">
+            <code id="citation-text">@misc{song2026memduet,
+  title  = {MemDuet: Learning Dual-Process Memory for Long-Context Reasoning},
+  author = {Song, Jiangcheng and Jing, Haodong and Mu, Yulin and
+            Tao, Lesong and Wang, Jixin and Cui, Jin and Ren, Tianjing and
+            Xie, Runxuan and Ma, Yongqiang and Zheng, Nanning},
+  year   = {2026},
+  eprint = {2610.19928},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CL},
+  url    = {https://arxiv.org/abs/2610.19928}
+}</code>
+            <button id="copy-bibtex" class="button" type="button">Copy BibTeX</button>
+          </div>
+          <p>Available as <a href="https://arxiv.org/abs/2610.19928" target="_blank" rel="noopener">arXiv:2610.19928</a> [cs.CL].</p>
+          <a class="evidence-link" href="assets/memduet.bib" download>Download BibTeX <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg></a>
+          <p id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="container site-footer">MemDuet <span>·</span> 2026 <span>·</span> <a href="https://github.com/jiangchengsong/MemDuet" target="_blank" rel="noopener">Code</a> <span>·</span> <a href="mailto:enone@stu.xjtu.edu.cn">Contact</a></footer>
+
+  <dialog id="figure-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-header"><h2 id="dialog-title"></h2><button id="close-figure" class="button" type="button">Close <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+    <img id="dialog-image" alt="">
+    <p class="dialog-note">Press Escape to close.</p>
+  </dialog>
+</body>
+</html>

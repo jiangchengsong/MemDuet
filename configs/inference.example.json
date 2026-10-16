@@ -1,0 +1,49 @@
+{
+  "seed": 42,
+  "system1": {
+    "base_model": "system1",
+    "adapter_path": null,
+    "dtype": "bfloat16"
+  },
+  "system2": {
+    "base_model": "system2",
+    "adapter_path": null,
+    "dtype": "bfloat16"
+  },
+  "data": {
+    "chunk_tokens": 5000
+  },
+  "rollout": {
+    "window_size": 4,
+    "memory_tokens": 1024,
+    "answer_tokens": 1024,
+    "selection_mode": "threshold",
+    "decision_delta": -3.0,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "inference": {
+    "engine": "vllm",
+    "method": "memduet",
+    "gpu_device": "0",
+    "tensor_parallel_size": 1,
+    "max_num_seqs": 4,
+    "enforce_eager": false,
+    "timeout_seconds": 600,
+    "api_key_env": "VLLM_API_KEY",
+    "system1": {
+      "model_path": "system1",
+      "served_model_name": "system1",
+      "base_url": "http://127.0.0.1:8001/v1",
+      "max_model_len": 8192,
+      "gpu_memory_utilization": 0.22
+    },
+    "system2": {
+      "model_path": "system2",
+      "served_model_name": "system2",
+      "base_url": "http://127.0.0.1:8000/v1",
+      "max_model_len": 16384,
+      "gpu_memory_utilization": 0.6
+    }
+  }
+}

@@ -1,0 +1,23 @@
+You are a memory update gate.
+
+Given a question, the current memory, and a new text section,
+decide whether the section contains new task-relevant information
+that requires updating the memory.
+
+Output exactly one token:
+k = keep the current memory unchanged
+u = update the memory
+
+<problem>
+{prompt}
+</problem>
+
+<memory>
+{memory}
+</memory>
+
+<section>
+{chunk}
+</section>
+
+Decision:

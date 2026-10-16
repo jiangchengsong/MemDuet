@@ -1,0 +1,9 @@
+Copyright 2023-2025 Bytedance Ltd. and/or its affiliates
+
+This package adapts MemAgent components distributed under Apache-2.0,
+including asynchronous inference and memory-gate prompting.
+
+LongBench choice extraction follows the public LongBench / PI-Mem evaluation
+protocol. See the upstream sources at https://github.com/THUDM/LongBench
+and https://github.com/JetAstra/PI-Mem. Model weights and datasets are distributed
+separately under their respective licenses.

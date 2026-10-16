@@ -1,0 +1,186 @@
+{
+  "source": "paper_arr2026_v3_en/figures/memduet_intro_measured_data.json",
+  "source_sha256": "a550a49a72345f3758898033ebd70b98beea5831d5764991a33f9d19020969fc",
+  "snapshot": "2026-10-12T08:30:21.961548+08:00",
+  "aggregation": "Equal weighting of the nine shared context lengths from 7K to 1.75M; the 3.5M row is separate.",
+  "timing": "A100-equivalent workload-specific estimates; accuracy and efficiency cohorts are not necessarily matched.",
+  "means": [
+    {
+      "method": "MemDuet (7B + 2B)",
+      "mean_accuracy": 84.2011111111111,
+      "included_contexts": [
+        "7K",
+        "14K",
+        "28K",
+        "56K",
+        "112K",
+        "224K",
+        "448K",
+        "896K",
+        "1.75M"
+      ]
+    },
+    {
+      "method": "MemAgent 7B",
+      "mean_accuracy": 78.73222222222222,
+      "included_contexts": [
+        "7K",
+        "14K",
+        "28K",
+        "56K",
+        "112K",
+        "224K",
+        "448K",
+        "896K",
+        "1.75M"
+      ]
+    },
+    {
+      "method": "LycheeMemory 7B",
+      "mean_accuracy": 79.34,
+      "included_contexts": [
+        "7K",
+        "14K",
+        "28K",
+        "56K",
+        "112K",
+        "224K",
+        "448K",
+        "896K",
+        "1.75M"
+      ]
+    },
+    {
+      "method": "InfMem 4B",
+      "mean_accuracy": 76.82222222222222,
+      "included_contexts": [
+        "7K",
+        "14K",
+        "28K",
+        "56K",
+        "112K",
+        "224K",
+        "448K",
+        "896K",
+        "1.75M"
+      ]
+    },
+    {
+      "method": "ReMemR1 7B",
+      "mean_accuracy": 79.6,
+      "included_contexts": [
+        "7K",
+        "14K",
+        "28K",
+        "56K",
+        "112K",
+        "224K",
+        "448K",
+        "896K",
+        "1.75M"
+      ]
+    }
+  ],
+  "accuracy": [
+    {
+      "method": "MemDuet",
+      "context": "7K",
+      "accuracy_percent": 87.5
+    },
+    {
+      "method": "MemDuet",
+      "context": "14K",
+      "accuracy_percent": 83.59
+    },
+    {
+      "method": "MemDuet",
+      "context": "28K",
+      "accuracy_percent": 89.06
+    },
+    {
+      "method": "MemDuet",
+      "context": "56K",
+      "accuracy_percent": 79.69
+    },
+    {
+      "method": "MemDuet",
+      "context": "112K",
+      "accuracy_percent": 87.5
+    },
+    {
+      "method": "MemDuet",
+      "context": "224K",
+      "accuracy_percent": 85.94
+    },
+    {
+      "method": "MemDuet",
+      "context": "448K",
+      "accuracy_percent": 82.81
+    },
+    {
+      "method": "MemDuet",
+      "context": "896K",
+      "accuracy_percent": 82.03
+    },
+    {
+      "method": "MemDuet",
+      "context": "1.75M",
+      "accuracy_percent": 79.69
+    },
+    {
+      "method": "MemDuet",
+      "context": "3.5M",
+      "accuracy_percent": 75.78
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "7K",
+      "accuracy_percent": 81.25
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "14K",
+      "accuracy_percent": 81.25
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "28K",
+      "accuracy_percent": 82.03
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "56K",
+      "accuracy_percent": 80.47
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "112K",
+      "accuracy_percent": 79.69
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "224K",
+      "accuracy_percent": 75.78
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "448K",
+      "accuracy_percent": 76.56
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "896K",
+      "accuracy_percent": 74.22
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "1.75M",
+      "accuracy_percent": 77.34
+    },
+    {
+      "method": "RL-MemAgent",
+      "context": "3.5M",
+      "accuracy_percent": 71.88
+    }
+  ]
+}

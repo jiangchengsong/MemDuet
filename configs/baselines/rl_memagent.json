@@ -1,0 +1,17 @@
+{
+  "extends": "../inference.json",
+  "description": "RL-MemAgent recurrent-memory baseline using the published RL-MemoryAgent-7B checkpoint.",
+  "system2": {
+    "base_model": "BytedTsinghua-SIA/RL-MemoryAgent-7B",
+    "adapter_path": null
+  },
+  "inference": {
+    "method": "all_chunks",
+    "system2": {
+      "model_path": "models/RL-MemoryAgent-7B",
+      "checkpoint_source": "BytedTsinghua-SIA/RL-MemoryAgent-7B",
+      "served_model_name": "rl-memagent",
+      "base_url": "http://127.0.0.1:8002/v1"
+    }
+  }
+}
